@@ -1,5 +1,5 @@
 - 👋 Hi, I’m Chaitanya Vyas.
-- 👀 I’m a Highly motivated individual who aspires to learn as much as possible in a lifetime.
+- 👀 I’m a highly motivated individual who aspires to learn as much as possible in a lifetime.
       Enthusiastic programmer and researcher of all fields of Machine Learning from Reinforcement Learning, Natural Language Processing to Computer Vision.
 - 🌱 I’m currently learning Neural Networks and different ML frameworks.
 - 💞️ I’m looking to collaborate on any Python or ML related projects.
