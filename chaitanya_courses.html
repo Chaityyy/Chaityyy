@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chaitanya Vyas — Academic Coursework</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --warm-white: #faf8f4;
+    --ink: #1a1612;
+    --ink-light: #3d3530;
+    --ink-muted: #7a6f65;
+    --ink-faint: #b5ada5;
+    --gold: #c8a84b;
+    --gold-light: #e8d5a0;
+    --rust: #b85c38;
+    --teal: #2a6b6b;
+    --teal-light: #e6f0f0;
+    --border: #ddd8d0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* Decorative top border */
+  .top-rule {
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--rust) 50%, var(--teal) 100%);
+  }
+
+  /* Page */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding-bottom: 40px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+
+  .header-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-muted);
+    margin-bottom: 20px;
+  }
+
+  .header-degrees {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .degree-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--teal);
+    background: var(--teal-light);
+    border: 1px solid rgba(42,107,107,0.2);
+    padding: 5px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 56px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .stat-item {
+    background: var(--cream);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-number span {
+    color: var(--gold);
+  }
+
+  .stat-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+
+  /* Section layout */
+  .section {
+    margin-bottom: 52px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.15s; }
+  .section:nth-child(4) { animation-delay: 0.2s; }
+  .section:nth-child(5) { animation-delay: 0.25s; }
+  .section:nth-child(6) { animation-delay: 0.3s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .section-icon.math { background: #fff3e0; }
+  .section-icon.found { background: #e8f5e9; }
+  .section-icon.elec { background: #e3f2fd; }
+  .section-icon.hum { background: #fce4ec; }
+  .section-icon.disc { background: #f3e5f5; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .section-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 1px;
+    margin-left: auto;
+  }
+
+  /* Course grid */
+  .course-grid {
+    display: grid;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .semester-block {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .semester-block:last-child {
+    border-bottom: none;
+  }
+
+  .sem-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .sem-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+  }
+
+  .math .sem-badge { background: #fff3e0; color: #e65100; border: 1px solid #ffcc02; }
+  .found .sem-badge { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+  .elec .sem-badge { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+  .hum .sem-badge { background: #fce4ec; color: #880e4f; border: 1px solid #f48fb1; }
+  .disc .sem-badge { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+
+  .sem-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 1px;
+  }
+
+  .courses-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0;
+  }
+
+  .course-item {
+    padding: 14px 20px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+    position: relative;
+  }
+
+  .course-item:hover {
+    background: var(--cream);
+  }
+
+  .course-item:last-child,
+  .course-item:nth-last-child(-n+2):nth-child(odd) {
+    border-right: none;
+  }
+
+  .course-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-light);
+    line-height: 1.4;
+    text-transform: capitalize;
+  }
+
+  /* Flat list for electives */
+  .flat-list {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .flat-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+    transition: background 0.15s;
+  }
+
+  .flat-item:last-child { border-bottom: none; }
+
+  .flat-item:hover { background: var(--cream); }
+
+  .flat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .hum .flat-dot { background: #e91e63; }
+  .disc .flat-dot { background: #9c27b0; }
+
+  .flat-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-light);
+    text-transform: capitalize;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 60px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 12px;
+  }
+
+  .footer-left {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 1px;
+  }
+
+  .footer-sig {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-muted);
+  }
+
+  /* Decorative ornament */
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 18px;
+    margin: 8px 0 40px;
+    letter-spacing: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px 60px; }
+    .stats-strip { grid-template-columns: 1fr; }
+    .courses-list { grid-template-columns: 1fr; }
+    .course-item { border-right: none; }
+    .footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="top-rule"></div>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-eyebrow">Academic Transcript · BITS Pilani · 2018 – 2023</div>
+    <h1>Chaitanya Vyas</h1>
+    <div class="header-sub">Coursework Overview</div>
+    <div class="header-degrees">
+      <span class="degree-pill">B.E. Electronics Engineering</span>
+      <span class="degree-pill">M.Sc. Mathematics</span>
+    </div>
+  </div>
+
+  <div class="ornament">· · ✦ · ·</div>
+
+  <!-- Stats -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-number">5<span>+</span></div>
+      <div class="stat-desc">Years of Study</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">35<span>+</span></div>
+      <div class="stat-desc">Courses Completed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">2</div>
+      <div class="stat-desc">Degrees Earned</div>
+    </div>
+  </div>
+
+  <!-- FOUNDATION COURSES -->
+  <div class="section found">
+    <div class="section-label">
+      <div class="section-icon found">🎓</div>
+      <div class="section-title">Foundation Courses</div>
+      <div class="section-count">First Year · 14 courses</div>
+    </div>
+    <div class="course-grid">
+      <div class="semester-block">
+        <div class="sem-header">
+          <span class="sem-badge found">Semester 1 – 1</span>
+          <span class="sem-title">First Semester</span>
+        </div>
+        <div class="courses-list">
+          <div class="course-item"><div class="course-name">Engineering Graphics</div></div>
+          <div class="course-item"><div class="course-name">Thermodynamics</div></div>
+          <div class="course-item"><div class="course-name">General Chemistry</div></div>
+          <div class="course-item"><div class="course-name">Computer Programming</div></div>
+          <div class="course-item"><div class="course-name">Mathematics I</div></div>
+          <div class="course-item"><div class="course-name">Mechanical Oscillations & Waves</div></div>
+          <div class="course-item"><div class="course-name">Physics / Chemistry Laboratory</div></div>
+        </div>
+      </div>
+      <div class="semester-block">
+        <div class="sem-header">
+          <span class="sem-badge found">Semester 1 – 2</span>
+          <span class="sem-title">Second Semester</span>
+        </div>
+        <div class="courses-list">
+          <div class="course-item"><div class="course-name">General Biology</div></div>
+          <div class="course-item"><div class="course-name">Technical Report Writing</div></div>
+          <div class="course-item"><div class="course-name">Electrical Sciences</div></div>
+          <div class="course-item"><div class="course-name">Mathematics II</div></div>
+          <div class="course-item"><div class="course-name">Probability & Statistics</div></div>
+          <div class="course-item"><div class="course-name">Workshop Practice</div></div>
+          <div class="course-item"><div class="course-name">Biology Laboratory</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATHEMATICS -->
+  <div class="section math">
+    <div class="section-label">
+      <div class="section-icon math">∑</div>
+      <div class="section-title">Mathematics (M.Sc.)</div>
+      <div class="section-count">Semesters 2–3 · 11 courses</div>
+    </div>
+    <div class="course-grid">
+      <div class="semester-block">
+        <div class="sem-header">
+          <span class="sem-badge math">Semester 2 – 1</span>
+          <span class="sem-title">Third Semester</span>
+        </div>
+        <div class="courses-list">
+          <div class="course-item"><div class="course-name">Optimization</div></div>
+          <div class="course-item"><div class="course-name">Discrete Mathematics</div></div>
+          <div class="course-item"><div class="course-name">Elementary Real Analysis</div></div>
+          <div class="course-item"><div class="course-name">Algebra I</div></div>
+          <div class="course-item"><div class="course-name">Mathematics III</div></div>
+        </div>
+      </div>
+      <div class="semester-block">
+        <div class="sem-header">
+          <span class="sem-badge math">Semester 2 – 2</span>
+          <span class="sem-title">Fourth Semester</span>
+        </div>
+        <div class="courses-list">
+          <div class="course-item"><div class="course-name">Mathematical Methods</div></div>
+          <div class="course-item"><div class="course-name">Operations Research</div></div>
+          <div class="course-item"><div class="course-name">Graphs and Networks</div></div>
+          <div class="course-item"><div class="course-name">Measure & Integration</div></div>
+        </div>
+      </div>
+      <div class="semester-block">
+        <div class="sem-header">
+          <span class="sem-badge math">Semester 3 – 1</span>
+          <span class="sem-title">Fifth Semester</span>
+        </div>
+        <div class="courses-list">
+          <div class="course-item"><div class="course-name">Introduction to Topology</div></div>
+          <div class="course-item"><div class="course-name">Ordinary Differential Equations</div></div>
+          <div class="course-item"><div class="course-name">Numerical Analysis</div></div>
+        </div>
+      </div>
+      <div class="semester-block">
+        <div class="sem-header">
+          <span class="sem-badge math">Semester 3 – 2</span>
+          <span class="sem-title">Sixth Semester</span>
+        </div>
+        <div class="courses-list">
+          <div class="course-item"><div class="course-name">Introduction to Functional Analysis</div></div>
+          <div class="course-item"><div class="course-name">Differential Geometry</div></div>
+          <div class="course-item"><div class="course-name">Partial Differential Equations</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ELECTRONICS -->
+  <div class="section elec">
+    <div class="section-label">
+      <div class="section-icon elec">⚡</div>
+      <div class="section-title">Electronics & Instrumentation (B.E.)</div>
+      <div class="section-count">Semesters 3 · 8 courses</div>
+    </div>
+    <div class="course-grid">
+      <div class="semester-block">
+        <div class="sem-header">
+          <span class="sem-badge elec">Semester 3 – 1</span>
+          <span class="sem-title">Fifth Semester</span>
+        </div>
+        <div class="courses-list">
+          <div class="course-item"><div class="course-name">Electrical Machines</div></div>
+          <div class="course-item"><div class="course-name">Electromagnetic Theory</div></div>
+          <div class="course-item"><div class="course-name">Electronic Devices</div></div>
+          <div class="course-item"><div class="course-name">Digital Design</div></div>
+        </div>
+      </div>
+      <div class="semester-block">
+        <div class="sem-header">
+          <span class="sem-badge elec">Semester 3 – 2</span>
+          <span class="sem-title">Sixth Semester</span>
+        </div>
+        <div class="courses-list">
+          <div class="course-item"><div class="course-name">Signals & Systems</div></div>
+          <div class="course-item"><div class="course-name">Control Systems</div></div>
+          <div class="course-item"><div class="course-name">Microelectronic Circuits</div></div>
+          <div class="course-item"><div class="course-name">Microprocessors & Interfacing</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUMANITIES ELECTIVES -->
+  <div class="section hum">
+    <div class="section-label">
+      <div class="section-icon hum">📚</div>
+      <div class="section-title">Humanities Electives</div>
+      <div class="section-count">3 courses</div>
+    </div>
+    <div class="flat-list">
+      <div class="flat-item hum">
+        <div class="flat-dot"></div>
+        <div class="flat-name">Applied Philosophy</div>
+      </div>
+      <div class="flat-item hum">
+        <div class="flat-dot"></div>
+        <div class="flat-name">Srimad Bhagavad Gita</div>
+      </div>
+      <div class="flat-item hum">
+        <div class="flat-dot"></div>
+        <div class="flat-name">Symbolic Logic</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCIPLINARY ELECTIVES -->
+  <div class="section disc">
+    <div class="section-label">
+      <div class="section-icon disc">🔬</div>
+      <div class="section-title">Disciplinary Electives</div>
+      <div class="section-count">2 courses</div>
+    </div>
+    <div class="flat-list">
+      <div class="flat-item disc">
+        <div class="flat-dot"></div>
+        <div class="flat-name">Number Theory</div>
+      </div>
+      <div class="flat-item disc">
+        <div class="flat-dot"></div>
+        <div class="flat-name">Neural Networks & Fuzzy Logic</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left">
+      BIRLA INSTITUTE OF TECHNOLOGY & SCIENCE · PILANI<br>
+      DUAL DEGREE · 2018 – 2023
+    </div>
+    <div class="footer-sig">Chaitanya Vyas</div>
+  </div>
+
+</div>
+</body>
+</html>
